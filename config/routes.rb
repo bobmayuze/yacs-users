@@ -3,4 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :profiles, only: [:show, :update]
+
+    end
+
+  end
 end

@@ -17,8 +17,8 @@ class Users::SessionsController < Devise::SessionsController
     sign_in(resource_name, resource)
     yield resource if block_given?
     respond_with resource, location: after_sign_in_path_for(resource)
-    puts Yacs::Auth.sign_in(resource)
-    session[:token] = Yacs::Auth.sign_in(resource)
+    # puts Yacs::Auth.sign_in(resource)
+    puts session[:token] = Yacs::Auth.sign_in(resource)
     puts '------------------------DONE CREATE--------------------'
     # super
   end
@@ -41,7 +41,7 @@ class Users::SessionsController < Devise::SessionsController
   protected
   def after_sign_in_path_for(resource)
     puts '------------------------AFTER SIGN IN--------------------'
-    puts session.inspect
+    # puts session.inspect
     puts '------------------------DONE AFTER SIGN IN--------------------'
     "#{session[:referer]}?token=#{session[:token]}" || signed_in_root_path(resource)
   end
